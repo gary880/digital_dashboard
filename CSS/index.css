@@ -1,0 +1,55 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.container {
+  margin: auto;
+  height: 768px;
+  width: 1280px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 72px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.container > a {
+    text-decoration: none;
+}
+.container > a >div {
+  position: relative;
+  height: 560px;
+  width: 300px;
+  border-radius: 36px;
+  color: rgb(184, 181, 0);
+  font-weight: 900;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.container :hover {
+  box-shadow: 0 0 3px 20px rgba(256, 256, 256, 0.5);
+  border-radius: 36px;
+  border: none;
+  transition: .25s;
+}
+.Car {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.Media {
+  background-color: white;
+}
+.Weather {
+  background-color: #0f538b;
+}
+.container > a :hover {
+  box-shadow: none;
+}

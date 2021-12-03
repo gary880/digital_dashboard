@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dashboard</title>
+    <link rel="stylesheet" href="./CSS/reset.css" />
+    <link rel="stylesheet" href="./CSS/car.css" />
+    <script src="https://kit.fontawesome.com/2681f9c92c.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="speed">
+        <span id="speed">0</span>
+        <span style="font-size:60px">MPH</span>
+      </div>
+      <div class="rotating">
+        <span id="rotating">2800</span>
+        <span style="font-size:60px">RPM</span>
+      </div>
+      <div class="battery">
+        <span id="battery">50</span>
+        <span style="font-size:60px">%</span>
+      </div>
+      <a href="./index.html" id="back"><i class="fas fa-undo" style="text-decoration: none;font-size: 30px;"></i></a>
+    </div>
+    <script>
+      const speed = document.getElementById("speed");
+      function speedFunction(){
+        let currentspeed =  parseFloat(speed.textContent);
+        let accelerate = Math.floor(Math.random()*6);
+        if(currentspeed<=100){
+          speed.textContent = currentspeed + accelerate;
+        }else{
+          speed.textContent = currentspeed - accelerate;
+        }
+      }
+      setInterval(speedFunction,200);
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link rel="stylesheet" href="./CSS/reset.css" />
+    <link rel="stylesheet" href="./CSS/weather.css" />
+    <script src="https://kit.fontawesome.com/2681f9c92c.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="weather_pic">
+          <i style="font-size: 100px;"class="fas fa-cloud-sun"></i>
+        </div>
+        <div class="location">
+          <p id="temperature"></p>
+          <p id="city"></p>
+          <p id="weather"></p>
+        </div>
+        <div class="time">
+          <span id="time"></span>
+        </div>
+        <div class="else"></div>
+      </div>
+      <a href="./index.html"id="back"><i class="fas fa-undo" style="text-decoration: none;font-size: 30px;"></i></a>
+    </div>
+
+    <script>
+      //   navigator.geolocation.getCurrentPosition(success, error);
+
+      //   function success(position) {
+      //     let lat = position.coords.latitude;
+      //     let lon = position.coords.longitude;
+      //     fetch(
+      //       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyAL1C3EakJ9s2XIyr1x_TQALrruxsJU_sY`
+      //     ).then(function (res) {
+      //         return res.json();
+      //       }).then(function(data){
+      //           console.log(data);
+      //       });
+      //   }
+      //   function error(err) {
+      //     console.log(err);
+      //   }
+
+      let place = "臺北市";
+      const time = document.getElementById("time");
+      const temperature = document.getElementById("temperature");
+      const city = document.getElementById("city");
+      const weather = document.getElementById("weather");
+
+ 
+      function updateTime() {
+        let newDate = new Date();
+        let hour = newDate.getHours();
+        let mins = newDate.getMinutes();
+        let sec = newDate.getSeconds();
+        if(sec<10){
+            sec = "0"+sec;
+        }
+        if(mins<10){
+            mins = "0"+mins;
+        }
+        if(hour<10){
+            mins = "0"+hour;
+        }
+        let outputText = `${hour}:${mins}:${sec}`;
+        time.textContent = outputText;
+      }
+
+
+      setInterval(updateTime, 1000);
+
+      fetch(
+        `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-EBA69EF6-FA8E-4FD0-8F08-8EE64ECF440D&format=JSON&locationName=${place}&elementName=Wx`
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          
+          let parameterName = data.records.location[0].weatherElement[0].time[0].parameter.parameterName;
+          let parameterValue = data.records.location[0].weatherElement[0].time[0].parameter.parameterValue;
+          console.log(data);
+          temperature.innerHTML = parameterValue + '°C';
+          city.innerHTML = place;
+          weather.innerHTML = parameterName;
+
+        });
+    </script>
+  </body>
+</html>
